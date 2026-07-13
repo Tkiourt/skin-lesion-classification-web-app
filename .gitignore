@@ -1,0 +1,38 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Dataset folders
+OrganizedImages/
+HAM10000_images_part_1/
+HAM10000_images_part_2/
+HAM10000_metadata.csv
+
+# Uploaded user images
+static/uploads/*
+
+# Keep uploads folder but ignore uploaded images
+!static/uploads/.gitkeep
+
+# Model checkpoints / backups
+model_checkpoints_backup/
+model_backup/
+*_save_at_*.keras
+
+# Training output plots
+plots/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/

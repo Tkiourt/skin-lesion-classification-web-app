@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="container">
+
+            <div class="header">
+                <h1>Model Evaluation Report</h1>
+                <p>
+                    Comparison between the Custom CNN, EfficientNetB0, MobileNetV2 and ResNet50 models.
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <strong>Note:</strong>
+                These plots were generated during model training and are used to compare the performance of the four models.
+            </div>
+
+            <!-- CUSTOM CNN SECTION -->
+
+            <div class="upload-card">
+                <h2>Custom CNN Model</h2>
+                <p>
+                    This model was built from scratch using convolutional layers, batch normalization,
+                    pooling, dropout and a final softmax classification layer.
+                </p>
+            </div>
+
+            <div class="upload-card">
+                <h2>Custom CNN - Training and Validation Accuracy</h2>
+                <img
+                    class="report-image"
+                    src="{{ url_for('static', filename='plots/accuracy_plot.png') }}"
+                    alt="Custom CNN accuracy plot"
+                >
+            </div>
+
+            <div class="upload-card">
+                <h2>Custom CNN - Training and Validation Loss</h2>
+                <img
+                    class="report-image"
+                    src="{{ url_for('static', filename='plots/loss_plot.png') }}"
+                    alt="Custom CNN loss plot"
+                >
+            </div>
+
+            <div class="upload-card">
+                <h2>Custom CNN - Confusion Matrix</h2>
+                <p>
+                    This matrix shows the real class of each validation image compared with the class predicted by the Custom CNN model.
+                </p>
+                <img
+                    class="report-image confusion-image"
+                    src="{{ url_for('static', filename='plots/confusion_matrix.png') }}"
+                    alt="Custom CNN confusion matrix"
+                >
+            </div>
+
+            <!-- EFFICIENTNETB0 SECTION -->
+
+            <div class="upload-card">
+                <h2>EfficientNetB0 Transfer Learning Model</h2>
+                <p>
+                    This model uses EfficientNetB0 from Keras Applications with pretrained ImageNet weights.
+                    The original classification head was removed and replaced with a new classifier for the 7 HAM10000 classes.
+                </p>
+            </div>
+
+            <div class="upload-card">
+                <h2>EfficientNetB0 - Training and Validation Accuracy</h2>
+                <img
+                    class="report-image"
+                    src="{{ url_for('static', filename='plots/efficientnet_accuracy_plot.png') }}"
+                    alt="EfficientNetB0 accuracy plot"
+                >
+            </div>
+
+            <div class="upload-card">
+                <h2>EfficientNetB0 - Training and Validation Loss</h2>
+                <img
+                    class="report-image"
+                    src="{{ url_for('static', filename='plots/efficientnet_loss_plot.png') }}"
+                    alt="EfficientNetB0 loss plot"
+                >
+            </div>
+
+            <div class="upload-card">
+                <h2>EfficientNetB0 - Confusion Matrix</h2>
+                <p>
+                    This matrix shows the real class of each validation image compared with the class predicted by the EfficientNetB0 model.
+                </p>
+                <img
+                    class="report-image confusion-image"
+                    src="{{ url_for('static', filename='plots/efficientnet_confusion_matrix.png') }}"
+                    alt="EfficientNetB0 confusion matrix"
+                >
+            </div>
+
+            <!-- MOBILENETV2 SECTION -->
+
+            <div class="upload-card">
+                <h2>MobileNetV2 Transfer Learning Model</h2>
+                <p>
+                    This model uses MobileNetV2 from Keras Applications with pretrained ImageNet weights.
+                    MobileNetV2 is a lightweight CNN architecture designed for efficient image classification.
+                </p>
+            </div>
+
+            <div class="upload-card">
+                <h2>MobileNetV2 - Training and Validation Accuracy</h2>
+                <img
+                    class="report-image"
+                    src="{{ url_for('static', filename='plots/mobilenet_accuracy_plot.png') }}"
+                    alt="MobileNetV2 accuracy plot"
+                >
+            </div>
+
+            <div class="upload-card">
+                <h2>MobileNetV2 - Training and Validation Loss</h2>
+                <img
+                    class="report-image"
+                    src="{{ url_for('static', filename='plots/mobilenet_loss_plot.png') }}"
+                    alt="MobileNetV2 loss plot"
+                >
+            </div>
+
+            <div class="upload-card">
+                <h2>MobileNetV2 - Confusion Matrix</h2>
+                <p>
+                    This matrix shows the real class of each validation image compared with the class predicted by the MobileNetV2 model.
+                </p>
+                <img
+                    class="report-image confusion-image"
+                    src="{{ url_for('static', filename='plots/mobilenet_confusion_matrix.png') }}"
+                    alt="MobileNetV2 confusion matrix"
+                >
+            </div>
+
+            <!-- RESNET50 SECTION -->
+
+            <div class="upload-card">
+                <h2>ResNet50 Transfer Learning Model</h2>
+                <p>
+                    This model uses ResNet50 from Keras Applications with pretrained ImageNet weights.
+                    ResNet50 is a deep convolutional neural network that uses residual connections to help train deeper models.
+                </p>
+            </div>
+
+            <div class="upload-card">
+                <h2>ResNet50 - Training and Validation Accuracy</h2>
+                <img
+                    class="report-image"
+                    src="{{ url_for('static', filename='plots/resnet50_accuracy_plot.png') }}"
+                    alt="ResNet50 accuracy plot"
+                >
+            </div>
+
+            <div class="upload-card">
+                <h2>ResNet50 - Training and Validation Loss</h2>
+                <img
+                    class="report-image"
+                    src="{{ url_for('static', filename='plots/resnet50_loss_plot.png') }}"
+                    alt="ResNet50 loss plot"
+                >
+            </div>
+
+            <div class="upload-card">
+                <h2>ResNet50 - Confusion Matrix</h2>
+                <p>
+                    This matrix shows the real class of each validation image compared with the class predicted by the ResNet50 model.
+                </p>
+                <img
+                    class="report-image confusion-image"
+                    src="{{ url_for('static', filename='plots/resnet50_confusion_matrix.png') }}"
+                    alt="ResNet50 confusion matrix"
+                >
+            </div>
+
+            <div class="upload-card">
+                <a class="report-button" href="/">
+                    Back to Classifier
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
