@@ -1,6 +1,5 @@
 import os
 import numpy as np
-import keras
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 
@@ -23,9 +22,11 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 loaded_models = {}
 
-def get_model(model_choice):
+def get_model():
     if "custom" in loaded_models:
         return loaded_models["custom"]
+
+    import keras
 
     model = keras.models.load_model("model/skin_model.keras")
     loaded_models["custom"] = model
@@ -62,22 +63,17 @@ class_labels = {
 # =========================
 
 def predict_skin_image(image_path, model_choice):
+    import keras
 
     image_size = (180, 180)
     selected_model = "Custom CNN"
 
-    model = get_model("custom")
-     
-    # Φόρτωση εικόνας στο σωστό μέγεθος για το αντίστοιχο μοντέλο
+    model = get_model()
+
     img = keras.utils.load_img(image_path, target_size=image_size)
-
-    # Μετατροπή εικόνας σε NumPy array
     img_array = keras.utils.img_to_array(img)
-
-    # Προσθήκη batch dimension: (1, height, width, 3)
     img_array = np.expand_dims(img_array, axis=0)
 
-    # Prediction
     predictions = model.predict(img_array, verbose=0)
 
     # Βρίσκουμε την κλάση με τη μεγαλύτερη πιθανότητα
