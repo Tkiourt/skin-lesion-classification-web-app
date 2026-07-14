@@ -22,15 +22,22 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 loaded_models = {}
 
-def get_model():
-    if "custom" in loaded_models:
-        return loaded_models["custom"]
+def get_model(model_choice):
+    if model_choice in loaded_models:
+        return loaded_models[model_choice]
 
     import keras
 
-    model = keras.models.load_model("model/skin_model.keras")
-    loaded_models["custom"] = model
+    if model_choice == "efficientnet":
+        model = keras.models.load_model("model/efficientnet_skin_model.keras")
+    elif model_choice == "mobilenet":
+        model = keras.models.load_model("model/mobilenet_skin_model.keras")
+    elif model_choice == "resnet50":
+        model = keras.models.load_model("model/resnet50_skin_model.keras")
+    else:
+        model = keras.models.load_model("model/skin_model.keras")
 
+    loaded_models[model_choice] = model
     return model
 
 # =========================
@@ -65,10 +72,20 @@ class_labels = {
 def predict_skin_image(image_path, model_choice):
     import keras
 
-    image_size = (180, 180)
-    selected_model = "Custom CNN"
+    if model_choice == "efficientnet":
+        image_size = (224, 224)
+        selected_model = "EfficientNetB0"
+    elif model_choice == "mobilenet":
+        image_size = (224, 224)
+        selected_model = "MobileNetV2"
+    elif model_choice == "resnet50":
+        image_size = (224, 224)
+        selected_model = "ResNet50"
+    else:
+        image_size = (180, 180)
+        selected_model = "Custom CNN"
 
-    model = get_model()
+    model = get_model(model_choice)
 
     img = keras.utils.load_img(image_path, target_size=image_size)
     img_array = keras.utils.img_to_array(img)
