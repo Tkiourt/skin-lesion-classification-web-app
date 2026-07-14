@@ -63,6 +63,14 @@ SkinCNN_WebApp/
 └── Ham10000_ResNet50.py
 
 
+## Docker Deployment
+
+This project includes a Dockerfile, so it can be deployed on a server using Docker.
+
+### Build the Docker image
+
+```bash
+docker build -t skin-cnn-app .
 
 pip install -r requirements.txt
 python app.py
