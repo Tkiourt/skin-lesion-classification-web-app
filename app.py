@@ -36,7 +36,7 @@ def get_model(model_choice):
     else:
         model = keras.models.load_model("model/skin_model.keras")
 
-    loaded_models=[model_choice]=model
+    loaded_models[model_choice]=model
     return model
 
 
