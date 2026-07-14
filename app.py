@@ -21,24 +21,16 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # 2. LOAD TRAINED MODELS
 # =========================
 
-loaded_models ={}
+loaded_models = {}
 
 def get_model(model_choice):
-    if model_choice in loaded_models:
-        return loaded_models[model_choice]
-    
-    if model_choice == "efficientnet":
-        model = keras.models.load_model("model/efficientnet_skin_model.keras")
-    elif model_choice == "mobilenet":
-        model = keras.models.load_model("model/mobilenet_skin_model.keras")
-    elif model_choice == "resnet50":
-        model = keras.models.load_model("model/resnet50_skin_model.keras")
-    else:
-        model = keras.models.load_model("model/skin_model.keras")
+    if "custom" in loaded_models:
+        return loaded_models["custom"]
 
-    loaded_models[model_choice]=model
+    model = keras.models.load_model("model/skin_model.keras")
+    loaded_models["custom"] = model
+
     return model
-
 
 # =========================
 # 3. CLASS NAMES
@@ -70,26 +62,11 @@ class_labels = {
 # =========================
 
 def predict_skin_image(image_path, model_choice):
-    """
-    Παίρνει την εικόνα και το μοντέλο που διάλεξε ο χρήστης.
-    Αν διάλεξε Custom CNN -> χρησιμοποιεί image size 180x180.
-    Αν διάλεξε EfficientNetB0 -> χρησιμοποιεί image size 224x224.
-    """
 
-    if model_choice == "efficientnet":
-       image_size = (224, 224)
-       selected_model = "EfficientNetB0"
-    elif model_choice == "mobilenet":
-       image_size = (224, 224)
-       selected_model = "MobileNetV2"
-    elif model_choice == "resnet50":
-       image_size = (224, 224)
-       selected_model = "ResNet50"
-    else:
-       image_size = (180, 180)
-       selected_model = "Custom CNN"
+    image_size = (180, 180)
+    selected_model = "Custom CNN"
 
-    model = get_model(model_choice)
+    model = get_model("custom")
      
     # Φόρτωση εικόνας στο σωστό μέγεθος για το αντίστοιχο μοντέλο
     img = keras.utils.load_img(image_path, target_size=image_size)
