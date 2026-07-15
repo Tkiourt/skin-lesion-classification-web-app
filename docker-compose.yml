@@ -3,5 +3,5 @@ services:
     image: tanerkiourt/skincnn-webapp:latest
     container_name: skin-cnn-app
     ports:
-      - "5000:5000"
+      - "8500:5000"
     restart: unless-stopped
